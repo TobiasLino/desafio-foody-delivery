@@ -1,0 +1,8 @@
+# Docker Compose principal
+#
+# Nesse arquivo estão as configurações tanto de backend, quanto de frontend.
+# Dessa forma, é possível executar todo o sistema utilizando um único comando
+# ``` docker compose up -d --build```
+include:
+  - ./rpd-backend/docker-compose.yaml
+  - ./rpd-frontend/docker-compose.yaml
