@@ -1,4 +1,4 @@
-package com.foody.delivery.rpd.config;
+package com.foody.delivery.rpd.infra.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

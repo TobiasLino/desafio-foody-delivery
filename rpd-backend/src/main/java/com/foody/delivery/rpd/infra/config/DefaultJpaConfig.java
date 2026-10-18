@@ -1,4 +1,4 @@
-package com.foody.delivery.rpd.config;
+package com.foody.delivery.rpd.infra.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.Bean;
