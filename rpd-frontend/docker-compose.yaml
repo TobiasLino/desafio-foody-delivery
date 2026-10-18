@@ -1,17 +1,18 @@
 # Frontend Docker Compose
+#
+# Não há "depends_on" para o back-end de propósito: quem chama a API é o navegador (não este
+# container), e arquivos incluídos pelo "include" do compose raiz não enxergam serviços um do outro.
 services:
   rpd-frontend:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: rpd-frontend
     ports:
       - "5173:5173"
-    depends_on:
-      rpd-backend:
-        condition: service_healthy
     volumes:
       - .:/app
       - /app/node_modules
     environment:
-      - API_URL=http://localhost:8080
+      - VITE_API_URL=http://localhost:8080
     command: npm run dev -- --host 0.0.0.0
