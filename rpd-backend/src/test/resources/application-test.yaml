@@ -14,5 +14,13 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yaml
     contexts: test
   mvc:
-    format:
-      date: yyyy-MM-dd
+    problemdetails:
+      enabled: true
+jwt:
+  secret: N6f9ozl9AV51R3HtUW7BkJwEONJcwnuWVdyogNh3yIp
+  expiration-seconds: 3600
+
+app:
+  operator:
+    email: teste@teste.com
+    password: teste123
