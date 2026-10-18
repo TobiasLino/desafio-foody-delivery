@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: rpd
+  datasource:
+    url: jdbc:postgresql://postgres:5432/rpd
+    driverClassName: org.postgresql.Driver
+    username: rpd
+    password: rpd
+  jpa:
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  mvc:
+    problemdetails:
+      enabled: true
+jwt:
+  secret: ${JWT_SECRET}
+  expiration-seconds: 3600
+
+app:
+  operator:
+    email: ${OPERATOR_EMAIL:}
+    password: ${OPERATOR_PASSWORD:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

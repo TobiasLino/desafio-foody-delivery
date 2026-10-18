@@ -1,0 +1,56 @@
+# Backend Docker Compose
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres
+    environment:
+      - 'POSTGRES_DB=rpd'
+      - 'POSTGRES_PASSWORD=rpd'
+      - 'POSTGRES_USER=rpd'
+    ports:
+      - '5432:5432'
+    networks:
+      - db-network
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -U rpd -d rpd' ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  rpd-backend:
+    image: 'rpd-foody-delivery:latest'
+    build:
+      context: .
+    container_name: rpd-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+    environment:
+      - 'JWT_SECRET=StTpF9X38XBfo97ZQs7Jr1j5K3Bxb5OGZNRj0xJ2bYh'
+      - 'OPERATOR_EMAIL=operador@rpd.com'
+      - 'OPERATOR_PASSWORD=Operador@123'
+    networks:
+      - db-network
+      - app-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  tests:
+    build:
+      context: .
+      target: test
+    profiles: ['test']
+    environment:
+      - 'JWT_SECRET=StTpF9X38XBfo97ZQs7Jr1j5K3Bxb5OGZNRj0xJ2bYh'
+
+networks:
+  app-network:
+    name: app-network
+  db-network:
+    name: db-network
