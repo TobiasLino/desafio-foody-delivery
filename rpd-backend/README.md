@@ -58,12 +58,12 @@ execução demora mais, porque as dependências do Maven são baixadas. Quando t
 `http://localhost:8080` e o Swagger UI em `http://localhost:8080/swagger-ui/index.html`.
 
 As tabelas são criadas automaticamente pelo Liquibase na inicialização, então não é necessária nenhuma configuração
-adicional. O único dado criado é o usuário operador (veja [Credenciais do operador](#credenciais-do-operador)).
+adicional. O banco já vem com usuários e pedidos de exemplo, um pedido em cada status, além das credenciais do Operador (veja [Credenciais do operador](#credenciais-do-operador)).
 
 ### Acompanhando os logs
 
 ```
-docker-compose logs -f rpd
+docker-compose logs -f rpd-backend
 ```
 
 ### Desligando
